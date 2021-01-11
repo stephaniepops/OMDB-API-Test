@@ -1,25 +1,22 @@
 import logo from "./logo.svg";
 import "./App.css";
+import { useSelector, useDispatch } from "react-redux";
 import { ChakraProvider } from "@chakra-ui/react";
 import SearchForm from "./Components/SearchForm";
-import { ReactQueryDevtools } from "react-query/devtools";
-import { QueryClient, QueryClientProvider } from "react-query";
-const queryClient = new QueryClient();
+import MovieListItem from "./Components/MovieListItem";
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ChakraProvider>
-        <div className="App">
-          <header className="App-header">
-            <div>
-              <SearchForm></SearchForm>
-            </div>
-          </header>
-        </div>
-      </ChakraProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <ChakraProvider>
+      <div className='App'>
+        <header className='App-header'>
+          <div>
+            <SearchForm></SearchForm>
+          </div>
+          <MovieListItem />
+        </header>
+      </div>
+    </ChakraProvider>
   );
 }
 

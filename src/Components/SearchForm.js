@@ -14,9 +14,10 @@ export default function SearchForm() {
 
   // Access the client
 
-  const getSearchData = async (searchKey) => {
+  const getSearchData = async ({ title }) => {
+    debugger;
     const { data } = await axios(
-      `http://www.omdbapi.com/?s=batman&page=${page}&apikey=24c13d37`
+      `http://www.omdbapi.com/?s=${title}&page=${page}&apikey=24c13d37`
     );
     console.log("returned info", data);
   };
