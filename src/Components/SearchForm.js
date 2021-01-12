@@ -17,11 +17,10 @@ export default function SearchForm() {
   //Store movie list state
 
   let page = 1;
-  const apiKey = "24c13d37";
   // Access the client
   const getSearchData = async ({ title }) => {
     const { data } = await axios(
-      `http://www.omdbapi.com/?s=${title}&page=${page}&apikey=${apiKey}`
+      `http://www.omdbapi.com/?s=${title}&page=${page}&apikey=${process.env.REACT_APP_API_KEY}`
     );
     return data.Search;
   };
