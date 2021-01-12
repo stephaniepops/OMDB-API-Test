@@ -16,5 +16,5 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-// export const getMovieListSelector = (state) => state.
+export const nominationsSelector = (state) => state.nominationState.movieData;
 export default reducer;

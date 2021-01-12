@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   Input,
   FormControl,
@@ -8,18 +8,22 @@ import {
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { storeSearchResults } from "../actions/searchResult";
 
 export default function SearchForm() {
+  const dispatch = useDispatch();
+
+  //Store movie list state
+
   let page = 1;
-
+  const apiKey = "24c13d37";
   // Access the client
-
   const getSearchData = async ({ title }) => {
-    debugger;
     const { data } = await axios(
-      `http://www.omdbapi.com/?s=${title}&page=${page}&apikey=24c13d37`
+      `http://www.omdbapi.com/?s=${title}&page=${page}&apikey=${apiKey}`
     );
-    console.log("returned info", data);
+    return data.Search;
   };
 
   function validateName(value) {
@@ -33,11 +37,11 @@ export default function SearchForm() {
   return (
     <Formik
       initialValues={{ title: "" }}
-      onSubmit={(values, actions) => {
-        setTimeout(() => {
-          getSearchData(values);
-          actions.setSubmitting(false);
-        }, 1000);
+      onSubmit={async (values, actions) => {
+        let searchData = await getSearchData(values);
+        dispatch(storeSearchResults(searchData));
+        actions.setSubmitting(false);
+        actions.resetForm();
       }}
     >
       {(props) => (

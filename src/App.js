@@ -3,7 +3,7 @@ import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
 import { ChakraProvider } from "@chakra-ui/react";
 import SearchForm from "./Components/SearchForm";
-import MovieListItem from "./Components/MovieListItem";
+import MovieList from "./Components/MovieList";
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
           <div>
             <SearchForm></SearchForm>
           </div>
-          <MovieListItem />
+          <MovieList></MovieList>
         </header>
       </div>
     </ChakraProvider>
