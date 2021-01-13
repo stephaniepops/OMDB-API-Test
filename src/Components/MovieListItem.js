@@ -1,31 +1,57 @@
-import React from "react";
-import { ChakraProvider, Box, Image, Text, IconButton } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { Box, Image, IconButton } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import styled from "@emotion/styled";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addNomination, removeNomination } from "../actions/nomination";
+import { nominationsSelector } from "../reducers/nominations";
 //styled components for additional styles
 const MovieTitle = styled.div`
   white-space: nowrap;
   margin: 15px;
 `;
-const Year = styled.div`
+const YearContainer = styled.div`
   white-space: nowrap;
   margin: 15px;
 `;
 
-const MovieListItem = ({ title, year, posterURL }) => (
-  <ChakraProvider resetCSS>
+const MovieListItem = ({ movie }) => {
+  const { Title, Year, Poster, imdbID, Type } = movie;
+  const [isFavourite, setIsFavourite] = useState(false);
+
+  const dispatch = useDispatch();
+  const nominationList = useSelector(nominationsSelector);
+
+  const toggleFavourite = () => {
+    if (nominationList.length >= 5) {
+      console.log("List is full!");
+      return;
+    }
+    if (
+      !nominationList.some((nominatedMovie) => nominatedMovie.imdbID === imdbID)
+    ) {
+      dispatch(addNomination(movie));
+    } else {
+      dispatch(removeNomination(imdbID));
+      console.log("the movie is already in tehre.");
+    }
+    // if (nominationList.length < 5) {
+
+    // }
+  };
+
+  return (
     <Box
       display='flex'
       textAlign='left'
       justifyContent='flex-start'
       backgroundColor='gray.500'
     >
-      <Image width='50px' src={posterURL} opacity={1} borderRadius='sm' />
+      <Image width='50px' src={Poster} opacity={1} borderRadius='sm' />
       <Box display='flex' flexDirection='row' alignItems='center'>
         <Box display='flex'>
-          <MovieTitle>{title}</MovieTitle>
-          <Year>({year})</Year>
+          <MovieTitle>{Title}</MovieTitle>
+          <YearContainer>{Year}</YearContainer>
         </Box>
       </Box>
       <Box
@@ -38,6 +64,9 @@ const MovieListItem = ({ title, year, posterURL }) => (
         margin='15px'
       >
         <IconButton
+          onClick={() => {
+            toggleFavourite();
+          }}
           aria-label='icon'
           icon={<StarIcon />}
           size='lg'
@@ -50,7 +79,7 @@ const MovieListItem = ({ title, year, posterURL }) => (
         />
       </Box>
     </Box>
-  </ChakraProvider>
-);
+  );
+};
 
 export default MovieListItem;

@@ -8,14 +8,10 @@ const MovieList = () => {
 
   return (
     <div>
-      {movieListData.map(({ Title, Year, Poster }, index) => (
-        <MovieListItem
-          key={index}
-          title={Title}
-          year={Year}
-          posterURL={Poster}
-        />
-      ))}
+      {movieListData &&
+        movieListData.map((movie, index) => (
+          <MovieListItem key={index} movie={movie} />
+        ))}
     </div>
   );
 };

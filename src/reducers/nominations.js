@@ -1,4 +1,4 @@
-import { ADD_NOMINEE } from "../actions/nomination";
+import { ADD_NOMINEE, REMOVE_NOMINEE } from "../actions/nomination";
 
 const initialState = {
   topFiveMovies: [],
@@ -9,12 +9,23 @@ const reducer = (state = initialState, action) => {
     case ADD_NOMINEE:
       return {
         ...state,
-        movieData: action.payload,
+        topFiveMovies: [...state.topFiveMovies, action.payload],
+      };
+    case REMOVE_NOMINEE:
+      const topFiveMovies = [...state.topFiveMovies];
+      const filteredMovies = topFiveMovies.filter(
+        (movie) => movie.imdbID !== action.payload
+      );
+      debugger;
+      return {
+        ...state,
+        topFiveMovies: filteredMovies,
       };
     default:
       return state;
   }
 };
 
-export const nominationsSelector = (state) => state.nominationState.movieData;
+export const nominationsSelector = (state) =>
+  state.nominationState.topFiveMovies;
 export default reducer;
