@@ -17,7 +17,7 @@ const YearContainer = styled.div`
 
 const MovieListItem = ({ movie }) => {
   const { Title, Year, Poster, imdbID, Type } = movie;
-  const [isFavourite, setIsFavourite] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const dispatch = useDispatch();
   const nominationList = useSelector(nominationsSelector);
@@ -31,13 +31,12 @@ const MovieListItem = ({ movie }) => {
       !nominationList.some((nominatedMovie) => nominatedMovie.imdbID === imdbID)
     ) {
       dispatch(addNomination(movie));
-    } else {
-      dispatch(removeNomination(imdbID));
-      console.log("the movie is already in tehre.");
+      setIsDisabled(true);
+      // } else {
+      //   dispatch(removeNomination(imdbID));
+      //   console.log("the movie is already in tehre.");
+      // }
     }
-    // if (nominationList.length < 5) {
-
-    // }
   };
 
   return (
@@ -76,6 +75,7 @@ const MovieListItem = ({ movie }) => {
           backgroundColor='teal.500'
           isRound
           opacity={0.67}
+          isDisabled={isDisabled}
         />
       </Box>
     </Box>
