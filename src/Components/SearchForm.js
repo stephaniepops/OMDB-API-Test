@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { storeSearchResults } from "../actions/searchResult";
 
 export default function SearchForm() {
