@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MovieListItem from "./MovieListItem";
 import { useSelector } from "react-redux";
 import { searchResultSelector } from "../reducers/searchResults";
+import { ADD_NOMINATION } from "./MovieListItem";
+import { nominationsSelector } from "../reducers/nominations";
+import { useToast } from "@chakra-ui/react";
 
 const MovieList = () => {
   const movieListData = useSelector(searchResultSelector);
@@ -10,7 +13,7 @@ const MovieList = () => {
     <div>
       {movieListData &&
         movieListData.map((movie, index) => (
-          <MovieListItem key={index} movie={movie} />
+          <MovieListItem key={index} movie={movie} variant={ADD_NOMINATION} />
         ))}
     </div>
   );

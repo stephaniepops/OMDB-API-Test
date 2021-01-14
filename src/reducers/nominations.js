@@ -16,7 +16,6 @@ const reducer = (state = initialState, action) => {
       const filteredMovies = topFiveMovies.filter(
         (movie) => movie.imdbID !== action.payload
       );
-      debugger;
       return {
         ...state,
         topFiveMovies: filteredMovies,

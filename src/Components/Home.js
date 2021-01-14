@@ -1,15 +1,10 @@
 import React from "react";
-import SearchForm from "./SearchForm";
-import MovieList from "./MovieList";
+import Header from "./Header";
+
 const Home = () => {
   return (
     <div>
-      <header className='App-header'>
-        <div>
-          <SearchForm></SearchForm>
-        </div>
-        <MovieList></MovieList>
-      </header>
+      <Header />
     </div>
   );
 };
