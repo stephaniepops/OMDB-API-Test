@@ -14,13 +14,12 @@ import { storeSearchResults } from "../actions/searchResult";
 export default function SearchForm() {
   const dispatch = useDispatch();
 
-  //Store movie list state
+  //TODO: handle "too many results" error
 
-  let page = 1;
   // Access the client
-  const getSearchData = async ({ title }) => {
+  const getSearchData = async (title) => {
     const { data } = await axios(
-      `http://www.omdbapi.com/?s=${title}&page=${page}&apikey=${process.env.REACT_APP_API_KEY}`
+      `http://www.omdbapi.com/?s=${title}&type=movie&apikey=${process.env.REACT_APP_API_KEY}`
     );
     return data.Search;
   };
@@ -36,8 +35,8 @@ export default function SearchForm() {
   return (
     <Formik
       initialValues={{ title: "" }}
-      onSubmit={async (values, actions) => {
-        let searchData = await getSearchData(values);
+      onSubmit={async ({ title }, actions) => {
+        let searchData = await getSearchData(title.trim());
         dispatch(storeSearchResults(searchData));
         actions.setSubmitting(false);
         actions.resetForm();

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box, Image, IconButton } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import styled from "@emotion/styled";
@@ -14,15 +14,17 @@ const YearContainer = styled.div`
   white-space: nowrap;
   margin: 15px;
 `;
+export const REMOVE_NOMINATION = "REMOVE_NOMINATION";
+export const ADD_NOMINATION = "ADD_NOMINATION";
 
-const MovieListItem = ({ movie }) => {
+const MovieListItem = ({ movie, variant }) => {
   const { Title, Year, Poster, imdbID, Type } = movie;
-  const [isFavourite, setIsFavourite] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const dispatch = useDispatch();
   const nominationList = useSelector(nominationsSelector);
 
-  const toggleFavourite = () => {
+  const addFavourite = () => {
     if (nominationList.length >= 5) {
       console.log("List is full!");
       return;
@@ -31,13 +33,12 @@ const MovieListItem = ({ movie }) => {
       !nominationList.some((nominatedMovie) => nominatedMovie.imdbID === imdbID)
     ) {
       dispatch(addNomination(movie));
-    } else {
-      dispatch(removeNomination(imdbID));
-      console.log("the movie is already in tehre.");
+      setIsDisabled(true);
     }
-    // if (nominationList.length < 5) {
+  };
 
-    // }
+  const removeFavourite = () => {
+    dispatch(removeNomination(imdbID));
   };
 
   return (
@@ -63,20 +64,40 @@ const MovieListItem = ({ movie }) => {
         width='100%'
         margin='15px'
       >
-        <IconButton
-          onClick={() => {
-            toggleFavourite();
-          }}
-          aria-label='icon'
-          icon={<StarIcon />}
-          size='lg'
-          variant='link'
-          colorScheme='whiteAlpha'
-          color='whiteAlpha.900'
-          backgroundColor='teal.500'
-          isRound
-          opacity={0.67}
-        />
+        {variant === ADD_NOMINATION && (
+          <IconButton
+            onClick={() => {
+              addFavourite();
+            }}
+            aria-label='icon'
+            icon={<StarIcon />}
+            size='lg'
+            variant='link'
+            colorScheme='whiteAlpha'
+            color='whiteAlpha.900'
+            backgroundColor='teal.500'
+            isRound
+            opacity={0.67}
+            isDisabled={isDisabled}
+          />
+        )}
+        {variant === REMOVE_NOMINATION && (
+          <IconButton
+            onClick={() => {
+              removeFavourite();
+            }}
+            aria-label='icon'
+            size='lg'
+            variant='link'
+            colorScheme='whiteAlpha'
+            color='whiteAlpha.900'
+            icon={<StarIcon />}
+            backgroundColor='teal.500'
+            isRound
+            opacity={0.67}
+            isDisabled={isDisabled}
+          />
+        )}
       </Box>
     </Box>
   );
