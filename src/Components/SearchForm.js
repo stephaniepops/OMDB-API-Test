@@ -22,10 +22,24 @@ export default function SearchForm() {
   // Access the client
   const getSearchData = async (title) => {
     dispatch(storeSearchResults([]));
-    const { data } = await axios(
-      `http://www.omdbapi.com/?s=${title}&type=movie&apikey=${process.env.REACT_APP_API_KEY}`
-    );
-    return data.Search;
+
+    try {
+      const { data } = await axios(
+        `http://www.omdbapi.com/?s=${title}&type=movie&apikey=${process.env.REACT_APP_API_KEY}`
+      );
+      if (!data.Error) {
+        dispatch(storeSearchResults(data.Search));
+        return;
+      }
+      throw data.Error;
+    } catch (error) {
+      toast({
+        title: error,
+        status: "error",
+        duration: 7000,
+        isClosable: true,
+      });
+    }
   };
 
   function validateTitle(value) {
@@ -40,8 +54,7 @@ export default function SearchForm() {
     <Formik
       initialValues={{ title: "" }}
       onSubmit={async ({ title }, actions) => {
-        let searchData = await getSearchData(title.trim());
-        dispatch(storeSearchResults(searchData));
+        await getSearchData(title.trim());
         actions.setSubmitting(false);
         actions.resetForm();
       }}
