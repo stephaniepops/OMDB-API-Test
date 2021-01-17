@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import MovieListItem from "./MovieListItem";
 import { useSelector } from "react-redux";
 import { searchResultSelector } from "../reducers/searchResults";
 import { ADD_NOMINATION } from "./MovieListItem";
-import styled from "@emotion/styled/macro";
 
 const MovieList = () => {
   const movieListData = useSelector(searchResultSelector);

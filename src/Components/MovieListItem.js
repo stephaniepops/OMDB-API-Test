@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Image, IconButton, Divider } from "@chakra-ui/react";
 import { DeleteIcon, StarIcon } from "@chakra-ui/icons";
 import styled from "@emotion/styled";
@@ -19,7 +19,7 @@ export const REMOVE_NOMINATION = "REMOVE_NOMINATION";
 export const ADD_NOMINATION = "ADD_NOMINATION";
 
 const MovieListItem = ({ movie, variant }) => {
-  const { Title, Year, Poster, imdbID, Type } = movie;
+  const { Title, Year, Poster, imdbID } = movie;
 
   const dispatch = useDispatch();
   const nominationList = useSelector(nominationsSelector);
