@@ -23,7 +23,6 @@ const MovieListItem = ({ movie, variant }) => {
 
   const dispatch = useDispatch();
   const nominationList = useSelector(nominationsSelector);
-  const toast = useToast();
 
   const addFavourite = () => {
     if (nominationList.length >= 5) {
@@ -34,13 +33,6 @@ const MovieListItem = ({ movie, variant }) => {
       !nominationList.some((nominatedMovie) => nominatedMovie.imdbID === imdbID)
     ) {
       dispatch(addNomination(movie));
-      toast({
-        title: "Movie Added!",
-        description: `${Title} has been added to your nominations.`,
-        status: "success",
-        duration: 9000,
-        isClosable: true,
-      });
     }
   };
 
@@ -84,7 +76,14 @@ const MovieListItem = ({ movie, variant }) => {
         maxWidth='800px'
         width='100vw'
       >
-        <Image width='75px' src={Poster} opacity={1} borderRadius='sm' />
+        <Image
+          width='75px'
+          src={
+            Poster === "N/A" ? "https://via.placeholder.com/300x450" : Poster
+          }
+          opacity={1}
+          borderRadius='sm'
+        />
         <Box display='flex' flexDirection='row' alignItems='center'>
           <Box display='flex'>
             <MovieTitle>{Title}</MovieTitle>

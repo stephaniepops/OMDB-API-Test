@@ -21,6 +21,7 @@ export default function SearchForm() {
 
   // Access the client
   const getSearchData = async (title) => {
+    dispatch(storeSearchResults([]));
     const { data } = await axios(
       `http://www.omdbapi.com/?s=${title}&type=movie&apikey=${process.env.REACT_APP_API_KEY}`
     );
