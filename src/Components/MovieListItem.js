@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Image,
-  IconButton,
-  Divider,
-  useToast,
-  Text,
-} from "@chakra-ui/react";
+import { Box, Image, IconButton, Divider, Text } from "@chakra-ui/react";
 import { DeleteIcon, StarIcon } from "@chakra-ui/icons";
 import styled from "@emotion/styled";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,9 +11,7 @@ const MovieTitle = styled.div`
   margin-left: 30px;
   font-weight: bold;
 `;
-const YearContainer = styled.div`
-  white-space: nowrap;
-`;
+
 export const REMOVE_NOMINATION = "REMOVE_NOMINATION";
 export const ADD_NOMINATION = "ADD_NOMINATION";
 
@@ -32,7 +23,6 @@ const MovieListItem = ({ movie, variant }) => {
 
   const addFavourite = () => {
     if (nominationList.length >= 5) {
-      console.log("List is full!");
       return;
     }
     if (
@@ -103,7 +93,6 @@ const MovieListItem = ({ movie, variant }) => {
           <IconButton
             onClick={handleClick}
             aria-label='icon'
-            //TODO react-icons empty star
             icon={getIcon()}
             size='lg'
             variant='ghost'
