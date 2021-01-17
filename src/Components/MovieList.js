@@ -3,8 +3,7 @@ import MovieListItem from "./MovieListItem";
 import { useSelector } from "react-redux";
 import { searchResultSelector } from "../reducers/searchResults";
 import { ADD_NOMINATION } from "./MovieListItem";
-import { nominationsSelector } from "../reducers/nominations";
-import { useToast } from "@chakra-ui/react";
+import styled from "@emotion/styled/macro";
 
 const MovieList = () => {
   const movieListData = useSelector(searchResultSelector);

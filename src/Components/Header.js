@@ -12,10 +12,10 @@ const HeaderStyle = styled.div`
 
 const Header = () => {
   return (
-    <div>
+    <>
       <SearchForm />
       <MovieList />
-    </div>
+    </>
   );
 };
 

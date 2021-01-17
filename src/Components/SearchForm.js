@@ -5,16 +5,18 @@ import {
   FormLabel,
   Button,
   FormErrorMessage,
+  InputGroup,
+  InputRightElement,
+  IconButton,
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { storeSearchResults } from "../actions/searchResult";
+import { SearchIcon } from "@chakra-ui/icons";
 
 export default function SearchForm() {
   const dispatch = useDispatch();
-
-  //TODO: handle "too many results" error
 
   // Access the client
   const getSearchData = async (title) => {
@@ -47,20 +49,29 @@ export default function SearchForm() {
           <Field name='title' validate={validateName}>
             {({ field, form }) => (
               <FormControl isInvalid={form.errors.title && form.touched.title}>
-                <FormLabel htmlFor='title'>Movie Title</FormLabel>
-                <Input {...field} id='title' placeholder='Search title' />
+                <InputGroup
+                  size='md'
+                  maxWidth='1040px'
+                  minWidth='300px'
+                  width='100vw'
+                >
+                  <Input {...field} id='title' placeholder='Search title' />
+                  <InputRightElement>
+                    <IconButton
+                      h='1.75rem'
+                      size='sm'
+                      isLoading={props.isSubmitting}
+                      type='submit'
+                      aria-label='Search database'
+                      icon={<SearchIcon />}
+                    />
+                  </InputRightElement>
+                </InputGroup>
+
                 <FormErrorMessage>{form.errors.title}</FormErrorMessage>
               </FormControl>
             )}
           </Field>
-          <Button
-            mt={4}
-            colorScheme='teal'
-            isLoading={props.isSubmitting}
-            type='submit'
-          >
-            Submit
-          </Button>
         </Form>
       )}
     </Formik>

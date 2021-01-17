@@ -36,16 +36,10 @@ function App() {
     <ChakraProvider>
       <Container>
         <Router>
-          <nav>
-            <ul>
-              <li>
-                <Link to='/'>Home</Link>
-              </li>
-              <li>
-                <Link to='/nominations'>My Nominations</Link>
-              </li>
-            </ul>
-          </nav>
+          <Link to='/'>Home</Link>
+
+          <Link to='/nominations'>My Nominations</Link>
+
           <Switch>
             <Route path='/nominations'>
               <Nominations />
