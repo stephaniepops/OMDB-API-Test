@@ -6,6 +6,7 @@ import {
   InputGroup,
   InputRightElement,
   IconButton,
+  useToast,
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
@@ -16,6 +17,8 @@ import { SearchIcon } from "@chakra-ui/icons";
 export default function SearchForm() {
   const dispatch = useDispatch();
 
+  const toast = useToast();
+
   // Access the client
   const getSearchData = async (title) => {
     const { data } = await axios(
@@ -24,9 +27,9 @@ export default function SearchForm() {
     return data.Search;
   };
 
-  function validateName(value) {
+  function validateTitle(value) {
     let error;
-    if (!value) {
+    if (value.trim().length === 0) {
       error = "Input is required";
     }
     return error;
@@ -41,10 +44,12 @@ export default function SearchForm() {
         actions.setSubmitting(false);
         actions.resetForm();
       }}
+      validateOnChange={false}
+      validateOnBlur={false}
     >
       {(props) => (
         <Form>
-          <Field name='title' validate={validateName}>
+          <Field name='title' validate={validateTitle}>
             {({ field, form }) => (
               <FormControl isInvalid={form.errors.title && form.touched.title}>
                 <InputGroup
@@ -53,7 +58,12 @@ export default function SearchForm() {
                   minWidth='300px'
                   width='100vw'
                 >
-                  <Input {...field} id='title' placeholder='Search title' />
+                  <Input
+                    {...field}
+                    id='title'
+                    placeholder='Search title'
+                    required
+                  />
                   <InputRightElement>
                     <IconButton
                       h='1.75rem'
