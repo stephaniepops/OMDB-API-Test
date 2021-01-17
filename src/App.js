@@ -4,9 +4,10 @@ import Home from "./Components/Home";
 import Nominations from "./Components/NominationList";
 import styled from "@emotion/styled/macro";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { nominationsSelector } from "./reducers/nominations";
+import Topbar from "./Components/Topbar";
 
 const Container = styled.div`
   max-width: 1040px;
@@ -21,31 +22,25 @@ const Container = styled.div`
 function App() {
   const toast = useToast();
   const nominationsList = useSelector(nominationsSelector);
+
   useEffect(() => {
-    if (nominationsList.length === 5)
+    if (nominationsList.length === 5) {
       toast({
         title: "Your Nominations List is Full!",
         description: "",
         status: "info",
-        duration: 7000,
+        duration: 3000,
         isClosable: true,
+        position: "top",
       });
+    }
   }, [nominationsList.length, toast]);
 
   return (
     <ChakraProvider>
       <Container>
         <Router>
-          <nav>
-            <ul>
-              <li>
-                <Link to='/'>Home</Link>
-              </li>
-              <li>
-                <Link to='/nominations'>My Nominations</Link>
-              </li>
-            </ul>
-          </nav>
+          <Topbar />
           <Switch>
             <Route path='/nominations'>
               <Nominations />
