@@ -13,10 +13,15 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { storeSearchResults } from "../actions/searchResult";
 import { SearchIcon } from "@chakra-ui/icons";
+import styled from "@emotion/styled/macro";
+
+const Container = styled.div`
+  margin-bottom: 10px;
+  width: 100%;
+`;
 
 export default function SearchForm() {
   const dispatch = useDispatch();
-
   const toast = useToast();
 
   // Access the client
@@ -51,51 +56,50 @@ export default function SearchForm() {
   }
 
   return (
-    <Formik
-      initialValues={{ title: "" }}
-      onSubmit={async ({ title }, actions) => {
-        await getSearchData(title.trim());
-        actions.setSubmitting(false);
-        actions.resetForm();
-      }}
-      validateOnChange={false}
-      validateOnBlur={false}
-    >
-      {(props) => (
-        <Form>
-          <Field name='title' validate={validateTitle}>
-            {({ field, form }) => (
-              <FormControl isInvalid={form.errors.title && form.touched.title}>
-                <InputGroup
-                  size='md'
-                  maxWidth='1040px'
-                  minWidth='300px'
-                  width='100vw'
+    <Container>
+      <Formik
+        initialValues={{ title: "" }}
+        onSubmit={async ({ title }, actions) => {
+          await getSearchData(title.trim());
+          actions.setSubmitting(false);
+          actions.resetForm();
+        }}
+        validateOnChange={false}
+        validateOnBlur={false}
+      >
+        {(props) => (
+          <Form>
+            <Field name='title' validate={validateTitle}>
+              {({ field, form }) => (
+                <FormControl
+                  isInvalid={form.errors.title && form.touched.title}
                 >
-                  <Input
-                    {...field}
-                    id='title'
-                    placeholder='Search title'
-                    required
-                  />
-                  <InputRightElement>
-                    <IconButton
-                      h='1.75rem'
-                      size='sm'
-                      isLoading={props.isSubmitting}
-                      type='submit'
-                      aria-label='Search database'
-                      icon={<SearchIcon />}
+                  <InputGroup size='md' maxWidth='1040px' minWidth='300px'>
+                    <Input
+                      {...field}
+                      id='title'
+                      placeholder='Search title'
+                      required
                     />
-                  </InputRightElement>
-                </InputGroup>
+                    <InputRightElement>
+                      <IconButton
+                        h='1.75rem'
+                        size='sm'
+                        isLoading={props.isSubmitting}
+                        type='submit'
+                        aria-label='Search database'
+                        icon={<SearchIcon />}
+                      />
+                    </InputRightElement>
+                  </InputGroup>
 
-                <FormErrorMessage>{form.errors.title}</FormErrorMessage>
-              </FormControl>
-            )}
-          </Field>
-        </Form>
-      )}
-    </Formik>
+                  <FormErrorMessage>{form.errors.title}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+          </Form>
+        )}
+      </Formik>
+    </Container>
   );
 }
