@@ -25,7 +25,7 @@ export default function SearchForm() {
 
     try {
       const { data } = await axios(
-        `http://www.omdbapi.com/?s=${title}&type=movie&apikey=${process.env.REACT_APP_API_KEY}`
+        `https://www.omdbapi.com/?s=${title}&type=movie&apikey=${process.env.REACT_APP_API_KEY}`
       );
       if (!data.Error) {
         dispatch(storeSearchResults(data.Search));
