@@ -36,7 +36,7 @@ export default function SearchForm() {
       toast({
         title: error,
         status: "error",
-        duration: 7000,
+        duration: 3000,
         isClosable: true,
       });
     }

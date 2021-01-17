@@ -1,5 +1,12 @@
 import React from "react";
-import { Box, Image, IconButton, Divider, useToast } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  IconButton,
+  Divider,
+  useToast,
+  Text,
+} from "@chakra-ui/react";
 import { DeleteIcon, StarIcon } from "@chakra-ui/icons";
 import styled from "@emotion/styled";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +14,6 @@ import { addNomination, removeNomination } from "../actions/nomination";
 import { nominationsSelector } from "../reducers/nominations";
 //styled components for additional styles
 const MovieTitle = styled.div`
-  white-space: nowrap;
   margin-right: 10px;
   margin-left: 30px;
   font-weight: bold;
@@ -84,20 +90,16 @@ const MovieListItem = ({ movie, variant }) => {
           opacity={1}
           borderRadius='sm'
         />
-        <Box display='flex' flexDirection='row' alignItems='center'>
-          <Box display='flex'>
-            <MovieTitle>{Title}</MovieTitle>
-            <YearContainer>({Year})</YearContainer>
-          </Box>
+        <Box display='flex' flexWrap='wrap'>
+          <MovieTitle>
+            {Title}
+            <Text fontWeight='400' display='inline'>
+              {" "}
+              ({Year})
+            </Text>
+          </MovieTitle>
         </Box>
-        <Box
-          textAlign='left'
-          display='flex'
-          justifyContent='flex-end'
-          flexDirection='row'
-          alignItems='center'
-          width='100%'
-        >
+        <Box marginLeft='auto'>
           <IconButton
             onClick={handleClick}
             aria-label='icon'
@@ -113,6 +115,7 @@ const MovieListItem = ({ movie, variant }) => {
                 (nominatedMovie) => nominatedMovie.imdbID === imdbID
               ) && variant === ADD_NOMINATION
             }
+            _disabled={{ cursor: "default", opacity: 0.4, boxShadow: "none" }}
           />
         </Box>
       </Box>

@@ -29,8 +29,9 @@ function App() {
         title: "Your Nominations List is Full!",
         description: "",
         status: "info",
-        duration: 7000,
+        duration: 3000,
         isClosable: true,
+        position: "top",
       });
     }
   }, [nominationsList.length, toast]);

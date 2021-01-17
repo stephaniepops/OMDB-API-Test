@@ -24,8 +24,8 @@ const container = {
   },
 };
 const item = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1 },
+  hidden: { opacity: 0, x: -20 },
+  show: { opacity: 1, x: 0 },
 };
 
 const MovieList = () => {

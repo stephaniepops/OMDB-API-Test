@@ -3,6 +3,7 @@ import MovieListItem, { REMOVE_NOMINATION } from "./MovieListItem";
 import { useSelector } from "react-redux";
 import { nominationsSelector } from "../reducers/nominations";
 import { Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 const NominationList = () => {
   const nominationsData = useSelector(nominationsSelector);
@@ -18,7 +19,8 @@ const NominationList = () => {
         </Text>
       ) : (
         <Text fontSize='1.5em' fontWeight='400'>
-          Nothing here :( Click HERE to search for your favourite movies!
+          Nothing here :( Click <Link to='/'>here</Link> to search for your
+          favourite movies!
         </Text>
       )}
 
