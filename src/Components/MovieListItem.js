@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Image, IconButton, Divider } from "@chakra-ui/react";
+import { Box, Image, IconButton, Divider, useToast } from "@chakra-ui/react";
 import { DeleteIcon, StarIcon } from "@chakra-ui/icons";
 import styled from "@emotion/styled";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,6 +23,7 @@ const MovieListItem = ({ movie, variant }) => {
 
   const dispatch = useDispatch();
   const nominationList = useSelector(nominationsSelector);
+  const toast = useToast();
 
   const addFavourite = () => {
     if (nominationList.length >= 5) {
@@ -33,6 +34,13 @@ const MovieListItem = ({ movie, variant }) => {
       !nominationList.some((nominatedMovie) => nominatedMovie.imdbID === imdbID)
     ) {
       dispatch(addNomination(movie));
+      toast({
+        title: "Movie Added!",
+        description: `${Title} has been added to your nominations.`,
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   };
 
