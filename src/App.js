@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { nominationsSelector } from "./reducers/nominations";
+import Topbar from "./Components/Topbar";
 
 const Container = styled.div`
   max-width: 1040px;
@@ -36,10 +37,7 @@ function App() {
     <ChakraProvider>
       <Container>
         <Router>
-          <Link to='/'>Home</Link>
-
-          <Link to='/nominations'>My Nominations</Link>
-
+          <Topbar />
           <Switch>
             <Route path='/nominations'>
               <Nominations />
