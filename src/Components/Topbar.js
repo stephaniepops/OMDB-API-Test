@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled/macro";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import FilmStripIcon from "./FilmStripIcon";
+import { Link } from "react-router-dom";
 import MyNominationsLink from "./MyNominationsLink";
 
 const Logo = styled.img`
