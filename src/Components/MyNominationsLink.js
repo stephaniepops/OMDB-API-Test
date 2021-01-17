@@ -23,6 +23,7 @@ const MyNominationsLink = () => {
   useEffect(() => {
     controls.start({
       scale: [0.75, 1.2, 1],
+      transition: { type: "spring", stiffness: 300, duration: 0.3 },
     });
   }, [controls, nominationsData.length]);
 

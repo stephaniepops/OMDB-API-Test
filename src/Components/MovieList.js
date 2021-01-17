@@ -11,7 +11,7 @@ const MovieContainer = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: 820px;
-  width: 100vw;
+  width: 100%;
 `;
 const MovieList = () => {
   const movieListData = useSelector(searchResultSelector);

@@ -1,7 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import MovieListItem from "./MovieListItem";
+import styled from "@emotion/styled/macro";
 
+const MotionContainer = styled(motion.div)`
+  width: 100%;
+`;
 const container = {
   hidden: { opacity: 0 },
   show: {
@@ -18,7 +22,7 @@ const item = {
 
 const AnimatedList = ({ movieListData, variant }) => {
   return (
-    <motion.div
+    <MotionContainer
       variants={container}
       initial='hidden'
       animate='show'
@@ -29,7 +33,7 @@ const AnimatedList = ({ movieListData, variant }) => {
           <MovieListItem movie={movie} variant={variant} />
         </motion.div>
       ))}
-    </motion.div>
+    </MotionContainer>
   );
 };
 

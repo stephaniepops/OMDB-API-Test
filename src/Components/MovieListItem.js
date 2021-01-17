@@ -70,7 +70,6 @@ const MovieListItem = ({ movie, variant }) => {
         margin='10px'
         minWidth='300px'
         maxWidth='800px'
-        width='100vw'
       >
         <Image
           width='75px'
