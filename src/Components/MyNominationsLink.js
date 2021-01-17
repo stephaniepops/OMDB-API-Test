@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, AvatarBadge, Badge, Stack } from "@chakra-ui/react";
+import { Badge } from "@chakra-ui/react";
 import FilmStripIcon from "./FilmStripIcon";
 import styled from "@emotion/styled/macro";
 import { useSelector } from "react-redux";
