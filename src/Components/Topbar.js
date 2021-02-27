@@ -27,8 +27,8 @@ const Topbar = () => {
       <Link to='/'>
         {" "}
         <Logo
-          src={process.env.PUBLIC_URL + "ShoppiesLogo.png"}
-          alt='shoppies logo'
+          src={process.env.PUBLIC_URL + "logo.png"}
+          alt='Favourite movie finder logo'
         />
       </Link>
       <LinkContainer>
